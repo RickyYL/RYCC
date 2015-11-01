@@ -16,6 +16,13 @@
 #include <sstream>
 #include <string>
 
+#define EOF_TYPE        1   // EOF
+#define NAME_TYPE       2   // identifier name
+#define COMMA_TYPE      3   // ','
+#define LBRACK_TYPE     4   // '['
+#define RBRACK_TYPE     5   // ']'
+#define EQUAL_TYPE      6   // '='
+
 class Token {
     
 public:
