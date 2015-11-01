@@ -7,7 +7,7 @@
 //
 
 //  Created: OCT 30, 2015
-//  Last Modified: OCT 31, 2015
+//  Last Modified: NOV 11, 2015
 
 //  Modification Logs:
 //  OCT 31, 2015:
@@ -15,6 +15,8 @@
 //      Re-mark some items with correct lables(private/proteced).
 //  OCT 31, 2015:
 //      Make it a LL(k) parser
+//  NOV 1, 2015:
+//      Subtract implementations to .cpp file
 
 
 #ifndef Parser_hpp
@@ -41,7 +43,7 @@ class Parser {
     
 public:
     
-    Parser(Lexer *, int);
+    Parser(Lexer &, int);
     virtual ~Parser();
     
     void match(int);
@@ -49,56 +51,31 @@ public:
     virtual void parse() = 0;
     
 protected:
-    
-    Lexer *input;
+
     Token *lookahead;
-    int k;
     int p = 0;
     
     Token lookaheadToken(int);
     int lookaheadType(int);
+    
+private:
+    
+    Lexer &input;
+    int k;
 };
 
 class ListParser: public Parser {
     
 public:
     
-    ListParser(ListLexer *, int);
+    ListParser(ListLexer &, int);
     
     void parse() { list(); }
     
-private:
+    void list();
+    void elements();
+    void element();
     
-    // [RULE] list: '[' elements ']' ;
-    void list() {
-        match(ListLexer::LBRACK_TYPE);
-        elements();
-        match(ListLexer::RBRACK_TYPE);
-    }
-    
-    // [RULE] elements: element (',' element)* ;
-    void elements() {
-        element();
-        while (lookaheadType(1) == ListLexer::COMMA_TYPE) {
-            match(ListLexer::COMMA_TYPE);
-            element();
-        }
-    }
-    
-    // [RULE] element: NAME '=' NAME | NAME | list ;
-    void element() {
-        if (lookaheadType(1) == ListLexer::NAME_TYPE &&
-            lookaheadType(2) == ListLexer::EQUAL_TYPE) {
-            match(ListLexer::NAME_TYPE);
-            match(ListLexer::EQUAL_TYPE);
-            match(ListLexer::NAME_TYPE);
-        } else if (lookaheadType(1) == ListLexer::NAME_TYPE)
-            match(ListLexer::NAME_TYPE);
-        else if (lookaheadType(1) == ListLexer::LBRACK_TYPE)
-            list();
-        else
-            throw Error("Expecting a NAME, LIST or an assignment.");
-    }
 };
 
 #endif /* Parser_hpp */
