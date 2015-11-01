@@ -7,28 +7,33 @@
 //
 
 #include <iostream>
+#include <string>
+#include <vector>
 
 #include "Lexer.hpp"
+#include "Parser.hpp"
 #include "Token.hpp"
+#include "Error.hpp"
 
 using namespace std;
 
 int main(int argc, const char * argv[]) {
     
-    ListLexer myLexer("[a , (a); bc]aa-23cddcdc2");
+    std::string input = "[a, b, c = d, [e, f]]";
     
+    cout << "Input text: " << input << endl << "Begin tokenizing..." << endl;
+    ListLexer myLexer(input);
+    myLexer.consume();
     auto tokens = myLexer.tokenize();
+    for (auto token: tokens)
+        cout << "\t" << token.text() << " " << myLexer.getTokenName(token.type()) << endl;
+    myLexer.reset();
     
-    for (auto token : tokens) {
-        cout << token.text() << " ";
-    }
-    cout << endl << endl;
+    cout << "Begin parsing..." << endl;
+    ListParser myParser(&myLexer, 2);
+    myParser.parse();
     
-    for (auto token : tokens) {
-        cout << "< \"" << token.text() << "\", "
-        << ListLexer::getTokenName(token.type())
-        << " >" << endl;
-    }
-
+    cout << "Parsing successful." << endl;
+    
     return 0;
 }

@@ -13,15 +13,16 @@
 #include <exception>
 #include <string>
 
-class Error: std::exception {
+class Error: public std::exception {
     
 public:
     
-    Error(std::string msg=""): msg(msg) { }
+    Error(std::string msg=""): _msg(msg) { }
+    std::string msg() { return _msg; }
     
 private:
     
-    std::string msg;
+    std::string _msg;
 };
 
 #endif /* Error_hpp */

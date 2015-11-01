@@ -7,7 +7,12 @@
 //
 
 //  Created: OCT 30, 2015
-//  Last Modified: OCT 30, 2015
+//  Last Modified: OCT 31, 2015
+
+//  Modification Logs:
+//  OCT 31, 2015:
+//      Resoloved a problem caused by incorrectly defining virtual functions.
+//      Refactoring code to correctly mark all members (private/protected).
 
 #ifndef Tokenizer_hpp
 #define Tokenizer_hpp
@@ -19,51 +24,57 @@
 #include "Token.hpp"
 #include "Error.hpp"
 
-// LL(k) Lexer class
+// LL(1) Lexer class
 
 class Lexer {
 
 public:
     
-    Lexer(std::string);             // default constructor
+    Lexer(std::string);
     
-    void consume();                 // proceed the current character
-    void match(char);               // math the given character with the current one
+    void consume();                 // read the next character
+    void match(char);               // if char == curr, consume()
+    void reset();                   // reset lexer
     
-protected:
+    virtual Token nextToken() = 0;
+    virtual std::vector<Token> tokenize() = 0;
+    virtual std::string getTokenName(int) = 0;
+    
+private:
     
     std::string input;              // the input text
     std::string::iterator curr;     // iterator of current character of input
+    
+protected:
+    
     char ch;                        // current character of input
 };
 
-class ListLexer: protected Lexer {
+class ListLexer: public Lexer {
+    
+    friend class ListParser;
     
 public:
     
-    ListLexer(std::string text): Lexer(text) { }    // default constructor
+    ListLexer(std::string);
     
     Token nextToken();              // proceed to read next token and return it
     std::vector<Token> tokenize();  // tokenize all items in inputs
+    std::string getTokenName(int);  // return the token name
     
-    Token NAME();                   // recognize if the token is a NAME_TYPE
-    Token NUMBER();                 // recognize if the token is a NUM_TYPE
-    void WHITE();                   // skip all white spaces
+private:
     
-    // Token type names
-    
-    static const int EOF_TYPE    = -1;  // EOF
+    static const int EOF_TYPE    = 1;   // EOF
     static const int NAME_TYPE   = 2;   // identifier name
-    static const int NUM_TYPE    = 3;   // numbers
-    static const int COMMA_TYPE  = 4;   // ','
-    static const int SEMIC_TYPE  = 5;   // ';'
-    static const int LBRACK_TYPE = 6;   // '['
-    static const int RBRACK_TYPE = 7;   // ']'
-    static const int LPARE_TYPE  = 8;   // '('
-    static const int RPARE_TYPE  = 9;   // ')'
+    static const int COMMA_TYPE  = 3;   // ','
+    static const int LBRACK_TYPE = 4;   // '['
+    static const int RBRACK_TYPE = 5;   // ']'
+    static const int EQUAL_TYPE  = 6;   // '='
     
     static const std::vector<std::string> tokenNames;
-    static std::string getTokenName(int n) { return tokenNames[n]; }
+    
+    Token NAME();                   // recognize if the token is a NAME_TYPE
+    void WHITE();                   // skip all white spaces
 };
 
 #endif /* Tokenizer_hpp */

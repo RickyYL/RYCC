@@ -6,6 +6,9 @@
 //  Copyright © 2015 Yuanqi. All rights reserved.
 //
 
+//  Created: OCT 30, 2015
+//  Last Modified: OCT 30, 2015
+
 #ifndef Token_hpp
 #define Token_hpp
 
@@ -17,7 +20,10 @@ class Token {
     
 public:
     
-    Token(int type, std::string text): _type(type), _text(text) {}
+    Token(): _type(-1), _text("") { }
+    
+    Token(int type, std::string text)
+        : _type(type), _text(text) { }
     
     std::string text() { return _text; }
     int type() { return _type; }

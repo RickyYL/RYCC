@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D2822371BE5E9FC00591114 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DE9135A1BE4974300804E95 /* Parser.cpp */; };
 		0DE913561BE4805200804E95 /* Error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DE913531BE476BB00804E95 /* Error.cpp */; };
 		0DE913571BE4805200804E95 /* Token.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DE913501BE46F3400804E95 /* Token.cpp */; };
 		0DE913581BE4805200804E95 /* Lexer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DE9134D1BE46D9100804E95 /* Lexer.cpp */; };
@@ -34,6 +35,8 @@
 		0DE913511BE46F3400804E95 /* Token.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Token.hpp; sourceTree = "<group>"; };
 		0DE913531BE476BB00804E95 /* Error.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Error.cpp; sourceTree = "<group>"; };
 		0DE913541BE476BB00804E95 /* Error.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Error.hpp; sourceTree = "<group>"; };
+		0DE9135A1BE4974300804E95 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
+		0DE9135B1BE4974300804E95 /* Parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Parser.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +59,8 @@
 				0DE913511BE46F3400804E95 /* Token.hpp */,
 				0DE9134D1BE46D9100804E95 /* Lexer.cpp */,
 				0DE9134E1BE46D9100804E95 /* Lexer.hpp */,
+				0DE9135A1BE4974300804E95 /* Parser.cpp */,
+				0DE9135B1BE4974300804E95 /* Parser.hpp */,
 				0DE913451BE46D7F00804E95 /* Compiler */,
 				0DE913441BE46D7F00804E95 /* Products */,
 			);
@@ -133,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D2822371BE5E9FC00591114 /* Parser.cpp in Sources */,
 				0DE913561BE4805200804E95 /* Error.cpp in Sources */,
 				0DE913571BE4805200804E95 /* Token.cpp in Sources */,
 				0DE913581BE4805200804E95 /* Lexer.cpp in Sources */,
@@ -255,6 +261,7 @@
 				0DE9134C1BE46D7F00804E95 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
