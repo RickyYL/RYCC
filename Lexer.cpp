@@ -6,13 +6,20 @@
 //  Copyright © 2015 Yuanqi. All rights reserved.
 //
 
+//  Created: OCT 30, 2015
+//  Last Modified: NOV 1, 2015
+
+//  Modification Logs:
+//  NOV 1, 2015:
+//      Resolved a logical problem caused by EOF_TYPE and EOF
+
 #include "Lexer.hpp"
 
-/******************************\
+/* * * * * *
  *
  *  Base Class of Lexer
  *
-\******************************/
+ * * * * * */
 
 Lexer::Lexer(std::string source)
     : input(source), curr(input.begin()), ch(*curr) {
@@ -38,11 +45,11 @@ void Lexer::reset() {
     ch = *curr;
 }
 
-/******************************\
+/* * * * * *
  *
- *  Lexer for List, ListParser
+ *  ListParser
  *
-\******************************/
+ * * * * * */
 
 ListLexer::ListLexer(std::string source)
     : Lexer(source) {
@@ -94,7 +101,7 @@ std::vector<Token> ListLexer::tokenize() {
 }
 
 std::string ListLexer::getTokenName(int n) {
-    return tokenNames[n];
+    return tokenNames[std::abs(n)];
 }
 
 const std::vector<std::string> ListLexer::tokenNames {

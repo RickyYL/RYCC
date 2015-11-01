@@ -13,6 +13,8 @@
 //  OCT 31, 2015:
 //      Resoloved a problem caused by incorrectly defining virtual functions.
 //      Refactoring code to correctly mark all members (private/protected).
+//  NOV 1, 2015
+//      Move token type name to Token.hpp, make it accessable to others.
 
 #ifndef Tokenizer_hpp
 #define Tokenizer_hpp
@@ -64,13 +66,6 @@ public:
     std::string getTokenName(int);  // return the token name
     
 private:
-    
-    static const int EOF_TYPE    = 1;   // EOF
-    static const int NAME_TYPE   = 2;   // identifier name
-    static const int COMMA_TYPE  = 3;   // ','
-    static const int LBRACK_TYPE = 4;   // '['
-    static const int RBRACK_TYPE = 5;   // ']'
-    static const int EQUAL_TYPE  = 6;   // '='
     
     static const std::vector<std::string> tokenNames;
     
