@@ -74,18 +74,4 @@ private:
     int found;
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif /* Error_hpp */
