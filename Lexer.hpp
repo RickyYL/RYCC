@@ -53,6 +53,7 @@ protected:
 class ListLexer: public Lexer {
     
     friend class ListParser;
+    friend class BTListParser;
     
 public:
     
