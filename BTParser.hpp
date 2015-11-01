@@ -6,6 +6,13 @@
 //  Copyright © 2015 Yuanqi. All rights reserved.
 //
 
+//  Created: NOV 1, 2015
+//  Last modified: NOV 1, 2015
+
+//  Modification Logs:
+//  NOV 1, 2015:
+//      Created file.
+
 #ifndef BTParser_hpp
 #define BTParser_hpp
 
@@ -32,7 +39,6 @@
 //              | list
 //              ;
 
-
 class BTParser {
     
 public:
@@ -52,43 +58,19 @@ private:
     std::vector<Token>          lookahead;
     std::size_t                 p = 0;
     
-    void        match(int);
-    void        consume();
-    Token       lookaheadToken(int);
-    int         lookaheadType(int);
+    void    match(int);
+    void    consume();
     
-    std::size_t mark();
-    void        release();
-    void        sync(int);
-    bool        isSpeculating();
+    void    mark();
+    void    release();
+    bool    isSpeculating();
     
-    bool        stat_list();
-    bool        stat_assign();
+    void    sync(int);
+    Token   lookaheadToken(int);
+    int     lookaheadType(int);
+    
+    bool    stat_list();
+    bool    stat_assign();
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #endif /* BTParser_hpp */
