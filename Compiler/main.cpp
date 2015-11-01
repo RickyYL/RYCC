@@ -11,7 +11,6 @@
 #include <vector>
 
 #include "Lexer.hpp"
-#include "Parser.hpp"
 #include "Token.hpp"
 #include "Error.hpp"
 
@@ -19,7 +18,7 @@ using namespace std;
 
 int main(int argc, const char * argv[]) {
     
-    std::string input = "[a, b, c = d, [e, f]]";
+    std::string input = "[e, f] = [g, h]";
     std::string input2;
     
     cout << "Input text: " << input << endl << "Begin tokenizing..." << endl;
@@ -29,12 +28,6 @@ int main(int argc, const char * argv[]) {
     for (auto token: tokens)
         cout << "\t" << token.text() << " " << myLexer.getTokenName(token.type()) << endl;
     myLexer.reset();
-    
-//    cout << "Begin parsing..." << endl;
-//    ListParser myParser(&myLexer, 2);
-//    myParser.parse();
-//    
-//    cout << "Parsing successful." << endl;
     
     
     
