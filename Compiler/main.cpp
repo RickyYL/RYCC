@@ -20,6 +20,7 @@ using namespace std;
 int main(int argc, const char * argv[]) {
     
     std::string input = "[a, b, c = d, [e, f]]";
+    std::string input2;
     
     cout << "Input text: " << input << endl << "Begin tokenizing..." << endl;
     ListLexer myLexer(input);
@@ -29,11 +30,13 @@ int main(int argc, const char * argv[]) {
         cout << "\t" << token.text() << " " << myLexer.getTokenName(token.type()) << endl;
     myLexer.reset();
     
-    cout << "Begin parsing..." << endl;
-    ListParser myParser(&myLexer, 2);
-    myParser.parse();
+//    cout << "Begin parsing..." << endl;
+//    ListParser myParser(&myLexer, 2);
+//    myParser.parse();
+//    
+//    cout << "Parsing successful." << endl;
     
-    cout << "Parsing successful." << endl;
+    
     
     return 0;
 }
