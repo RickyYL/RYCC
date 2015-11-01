@@ -16,7 +16,7 @@
 #include <sstream>
 #include <string>
 
-#define EOF_TYPE        1   // EOF
+#define EOF_TYPE       -1   // EOF
 #define NAME_TYPE       2   // identifier name
 #define COMMA_TYPE      3   // ','
 #define LBRACK_TYPE     4   // '['
