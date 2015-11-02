@@ -22,17 +22,26 @@
 #include <vector>
 
 #define EOF_TYPE       -1   // EOF
+#define NOTHING         0   // really nothing
 #define NAME_TYPE       2   // identifier name
 #define COMMA_TYPE      3   // ','
 #define EQUAL_TYPE      4   // '='
 #define LBRACK_TYPE     5   // '['
 #define RBRACK_TYPE     6   // ']'
 
+#define INT             20
+#define FLOAT           21
+
+#define PLUS            41
+#define SUB             42
+#define MULTI           43
+#define DEVIDE          44
+
 class Token {
     
 public:
     
-    Token(int type = EOF_TYPE, std::string text = "")
+    Token(int type = NOTHING, std::string text = "")
         : _type(type), _text(text) { }
     
     const std::string & text() const { return _text; }
