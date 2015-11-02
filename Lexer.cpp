@@ -22,27 +22,27 @@
  * * * * * */
 
 Lexer::Lexer(std::string source)
-    : input(source), curr(input.begin()), ch(*curr) {
+    : input(source), index(input.begin()), lookahead(*index) {
 }
 
 void Lexer::consume() {
-    curr++;
-    if (curr >= input.end())
-        ch = EOF;
+    index++;
+    if (index >= input.end())
+        lookahead = EOF_TYPE;
     else
-        ch = *curr;
+        lookahead = *index;
 }
 
-void Lexer::match(char x) {
-    if (ch == x)
+void Lexer::match(char expectType) {
+    if (lookahead == expectType)
         consume();
     else
-        throw Error("Cannot found expecting character.");
+        throw MismatchedCharacterException(expectType, lookahead);
 }
 
 void Lexer::reset() {
-    curr = input.begin();
-    ch = *curr;
+    index = input.begin();
+    lookahead = *index;
 }
 
 /* * * * * *
@@ -57,14 +57,14 @@ ListLexer::ListLexer(std::string source)
 
 Token ListLexer::nextToken() {
     
-    while (ch != EOF) {
-        switch (ch) {
+    while (lookahead != EOF) {
+        switch (lookahead) {
                 
         // for all single char symbols, recongize immediately
             case ' ':
             case '\t':
             case '\r':
-            case '\n':WHITE(); continue;
+            case '\n': WHITE(); continue;
                 
             case ',': consume(); return Token(COMMA_TYPE, ",");
             case '[': consume(); return Token(LBRACK_TYPE, "[");
@@ -73,10 +73,10 @@ Token ListLexer::nextToken() {
                 
         // for identifier, let the specific function to recongize
             default :
-                if (isalpha(ch))
+                if (isalpha(lookahead))
                     return NAME();
                 else
-                    throw Error("Invalid character. ");
+                    throw MismatchedCharacterException(NAME_TYPE, lookahead);
         }
     }
     
@@ -100,24 +100,16 @@ std::vector<Token> ListLexer::tokenize() {
     return tokens;
 }
 
-std::string ListLexer::getTokenName(int n) {
-    return tokenNames[std::abs(n)];
-}
-
-const std::vector<std::string> ListLexer::tokenNames {
-    "n/a", "<EOF>", "NAME", "COMMA", "LBRACK", "RBRACK", "EQUAL"
-};
-
 Token ListLexer::NAME() {
     std::string buffer;
     do {
-        buffer.push_back(ch);
+        buffer.push_back(lookahead);
         consume();
-    } while (isalpha(ch));
+    } while (isalpha(lookahead));
     return Token(NAME_TYPE, buffer);
 }
 
 void ListLexer::WHITE() {
-    while (isspace(ch))
+    while (isspace(lookahead))
         consume();
 }
