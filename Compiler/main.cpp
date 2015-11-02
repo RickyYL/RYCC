@@ -14,11 +14,13 @@
 #include "Token.hpp"
 #include "Error.hpp"
 
+#include "MemBTParser.hpp"
+
 using namespace std;
 
 int main(int argc, const char * argv[]) {
     
-    std::string input = "[e, f] = [g, h]";
+    std::string input = "[e, f, g, h]";
     std::string input2;
     
     cout << "Input text: " << input << endl << "Begin tokenizing..." << endl;
@@ -29,6 +31,8 @@ int main(int argc, const char * argv[]) {
         cout << "\t" << token.text() << " " << myLexer.getTokenName(token.type()) << endl;
     myLexer.reset();
     
+    Parser myParser(myLexer);
+    myParser.stat();
     
     
     return 0;

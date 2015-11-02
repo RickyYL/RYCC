@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0D59FEAE1BE62F8400DBC06D /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DE9135A1BE4974300804E95 /* Parser.cpp */; };
+		0DBFE3F71BE70FA800755F6B /* MemBTParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DBFE3F51BE70FA800755F6B /* MemBTParser.cpp */; };
 		0DE913561BE4805200804E95 /* Error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DE913531BE476BB00804E95 /* Error.cpp */; };
 		0DE913571BE4805200804E95 /* Token.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DE913501BE46F3400804E95 /* Token.cpp */; };
 		0DE913581BE4805200804E95 /* Lexer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DE9134D1BE46D9100804E95 /* Lexer.cpp */; };
@@ -29,6 +29,8 @@
 /* Begin PBXFileReference section */
 		0D59FEA91BE6099300DBC06D /* BTParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BTParser.cpp; sourceTree = "<group>"; };
 		0D59FEAA1BE6099300DBC06D /* BTParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BTParser.hpp; sourceTree = "<group>"; };
+		0DBFE3F51BE70FA800755F6B /* MemBTParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MemBTParser.cpp; sourceTree = "<group>"; };
+		0DBFE3F61BE70FA800755F6B /* MemBTParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MemBTParser.hpp; sourceTree = "<group>"; };
 		0DE913431BE46D7F00804E95 /* Compiler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Compiler; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DE913461BE46D7F00804E95 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		0DE9134D1BE46D9100804E95 /* Lexer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lexer.cpp; sourceTree = "<group>"; };
@@ -55,6 +57,8 @@
 		0DE9133A1BE46D7F00804E95 = {
 			isa = PBXGroup;
 			children = (
+				0DBFE3F51BE70FA800755F6B /* MemBTParser.cpp */,
+				0DBFE3F61BE70FA800755F6B /* MemBTParser.hpp */,
 				0DE913531BE476BB00804E95 /* Error.cpp */,
 				0DE913541BE476BB00804E95 /* Error.hpp */,
 				0DE913501BE46F3400804E95 /* Token.cpp */,
@@ -142,8 +146,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D59FEAE1BE62F8400DBC06D /* Parser.cpp in Sources */,
 				0DE913561BE4805200804E95 /* Error.cpp in Sources */,
+				0DBFE3F71BE70FA800755F6B /* MemBTParser.cpp in Sources */,
 				0DE913571BE4805200804E95 /* Token.cpp in Sources */,
 				0DE913581BE4805200804E95 /* Lexer.cpp in Sources */,
 				0DE913591BE4805200804E95 /* main.cpp in Sources */,
