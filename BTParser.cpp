@@ -26,49 +26,52 @@ BTParser::BTParser(Lexer &source): input(source) {
  *
  * * * * * */
 
-void BTParser::match(int type_name) {
-    if (lookaheadType(1) == type_name)
+void BTParser::match(int tokenType) {
+    if (lookaheadType(1) == tokenType)
         consume();
     else
-        throw MismatchedTokenException(type_name, lookaheadType(1));
+        throw MismatchedTokenException(tokenType, lookaheadType(1));
 }
 
 void BTParser::consume() {
-    p++;
-    if (p == lookahead.size() && !isSpeculating()) {
-        p = 0;
+    index(index() + 1);
+    if (index() == lookahead.size() && !isSpeculating()) {
+        index(0);
         lookahead.clear();
     }
     sync(1);
 }
 
-void BTParser::mark() {
-    markers.push_back(p);           // record the current p
-}
-
-void BTParser::release() {
-    p = markers[markers.size()-1];  // restore p
-    markers.pop_back();
-}
-
-bool BTParser::isSpeculating() {
-    // markers.size() > 0 means that it has some p's values
-    // that is, it's undergoing back-tracking parse
-    return markers.size() > 0;
-}
-
 // ensure i tokens before the current position
 void BTParser::sync(int i) {
-    if (p + i > lookahead.size()) {                 // if there's not enough tokens
-        std::size_t n = p + i - lookahead.size();   // get enough tokens from source lexer
+    // if there're not enough tokens ahead
+    if (index() + i > lookahead.size()) {
+        // calculate how many tokens need
+        auto n = index() + i - lookahead.size();
+        // read sufficient tokens
         for (int j = 0; j < n; j++)
             lookahead.push_back(input.nextToken());
     }
 }
 
+void BTParser::mark() {
+    markers.push_back(index());
+}
+
+void BTParser::release() {
+    index(markers[markers.size()-1]);
+    markers.pop_back();
+}
+
+bool BTParser::isSpeculating() {
+    return markers.size() > 0;
+}
+
 Token BTParser::lookaheadToken(int i) {
+    // make sure enough tokens ahead
     sync(i);
-    return lookahead[p+i-1];
+    // return the i-th ahead token
+    return lookahead[index() + i - 1];
 }
 
 int BTParser::lookaheadType(int i) {
@@ -151,4 +154,65 @@ void BTParser::assign() {
     list();
     match(EQUAL_TYPE);
     list();
+}
+
+/* * * * * *
+ *
+ *  Memo Parser
+ *
+ * * * * * */
+
+MemParser::MemParser(Lexer &source): BTParser(source) { }
+
+bool MemParser::alreadyParsedRule(std::map<std::size_t,int> memoization) {
+    
+    auto memo = memoization.count(index());
+    
+    if (memo == 0)
+        return false;
+    
+    std::cout << "parsed list before at index: " << index()
+    << "; skip ahead to token index: " << memo
+    << ": " << lookahead[memo].text();
+    
+    if (memo == FAILED)
+        throw PreviousParseFailedException();
+    
+    index(memo);
+    
+    return true;
+}
+
+void MemParser::memoize(std::map<std::size_t,int> memoization,
+             std::size_t startTokenIndex, bool failed)
+{
+    std::size_t stopTokenIndex = failed ? FAILED : index();
+    memoization.insert({startTokenIndex, stopTokenIndex});
+}
+
+void MemParser::list() {
+    
+    bool failed = false;
+    auto startTokenIndex = index();
+    
+    if (isSpeculating() && alreadyParsedRule(list_memo))
+        return;
+    
+    try { _list(); }
+    catch (RecognitionException re) {
+        failed = true;
+        if (isSpeculating())
+            memoize(list_memo, startTokenIndex, failed);
+        throw RecognitionException();
+    }
+    
+    if (isSpeculating())
+        memoize(list_memo, startTokenIndex, failed);
+}
+
+void MemParser::_list() {
+    std::cout << "Parse list rule at token index: " << index() << std::endl;
+    match(LBRACK_TYPE);
+    elements();
+    match(RBRACK_TYPE);
 }

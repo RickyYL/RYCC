@@ -20,6 +20,7 @@
 #include <vector>
 #include <string>
 #include <stack>
+#include <map>
 
 #include "Lexer.hpp"
 #include "Token.hpp"
@@ -51,12 +52,7 @@ public:
     void element();
     void assign();
     
-private:
-    
-    Lexer                       &input;
-    std::vector<std::size_t>    markers;
-    std::vector<Token>          lookahead;
-    std::size_t                 p = 0;
+protected:
     
     void    match(int);
     void    consume();
@@ -71,6 +67,37 @@ private:
     
     bool    stat_list();
     bool    stat_assign();
+    
+    const std::size_t & index() const { return _index; }
+    void index(const std::size_t &index) { _index = index; }
+    
+    std::vector<Token>          lookahead;
+    
+private:
+    
+    Lexer                       &input;
+    std::size_t                 _index = 0;
+    std::vector<std::size_t>    markers;
+};
+
+class MemParser: public BTParser {
+    
+public:
+    
+    MemParser(Lexer &);
+    
+    void list();
+    
+private:
+    
+    static const int FAILED = -1;
+    
+    std::map<std::size_t, int> list_memo;
+    
+    void _list();
+    bool alreadyParsedRule(std::map<std::size_t,int>);
+    void memoize(std::map<std::size_t,int>, std::size_t, bool);
+    
 };
 
 #endif /* BTParser_hpp */
