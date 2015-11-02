@@ -14,7 +14,7 @@
 #include "Token.hpp"
 #include "Error.hpp"
 
-#include "MemBTParser.hpp"
+#include "BTParser.hpp"
 
 using namespace std;
 
@@ -31,8 +31,7 @@ int main(int argc, const char * argv[]) {
         cout << "\t" << token.text() << " " << Token::getTokenName(token.type()) << endl;
     myLexer.reset();
     
-    Parser myParser(myLexer);
-    myParser.stat();
+    MemParser myParser(myLexer);
     
     return 0;
 }
