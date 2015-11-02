@@ -7,3 +7,7 @@
 //
 
 #include "Token.hpp"
+
+const std::vector<std::string> Token::tokenNames {
+    "n/a", "<EOF>", "NAME", "COMMA", "EQUAL", "LBRACK", "RBRACK",
+};
