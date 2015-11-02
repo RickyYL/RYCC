@@ -15,73 +15,62 @@
 #include <string>
 
 class Error: public std::exception {
-    
 public:
-    
     Error(std::string msg=""): _msg(msg) { }
     std::string msg() { return _msg; }
-    
 private:
-    
     std::string _msg;
 };
 
 class RecognitionException {
-    
 public:
-    
     RecognitionException(std::string msg=""): _msg(msg) { }
     std::string msg() { return _msg; }
-    
 private:
-    
     std::string _msg;
 };
 
 class MismatchedTokenException {
-    
 public:
-    
     MismatchedTokenException(int tokenType, int found)
-        : expecting(tokenType), found(found) { }
-    
+        : expect(tokenType), found(found) { }
     std::string msg() {
         std::ostringstream oss;
-        oss << "Expecting: " << expecting << ", found: " << found;
+        oss << "Expecting: " << expect << ", found: " << found;
         return oss.str();
     }
-    
 private:
-    
-    int expecting;
+    int expect;
+    int found;
+};
+
+class MismatchedCharacterException {
+public:
+    MismatchedCharacterException(int tokenType, int found)
+    : expect(tokenType), found(found) { }
+    std::string msg() {
+        std::ostringstream oss;
+        oss << "Expecting: " << expect << ", found: " << found;
+        return oss.str();
+    }
+private:
+    int expect;
     int found;
 };
 
 class NoViableAltException {
-    
 public:
-    
     NoViableAltException(int found): found(found) { }
-    
     std::string msg() {
         std::ostringstream oss;
         oss << "Expecting: stat, found: " << found;
         return oss.str();
     }
-    
 private:
-    
     int found;
 };
 
 class PreviousParseFailedException {
-    
-    
 };
-
-
-
-
-
 
 #endif /* Error_hpp */
