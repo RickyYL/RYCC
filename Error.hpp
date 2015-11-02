@@ -74,4 +74,14 @@ private:
     int found;
 };
 
+class PreviousParseFailedException {
+    
+    
+};
+
+
+
+
+
+
 #endif /* Error_hpp */
