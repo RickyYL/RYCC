@@ -41,7 +41,7 @@ class Token {
     
 public:
     
-    Token(int type = NOTHING, std::string text = "")
+    Token(int type = NOTHING, std::string text = "nil")
         : _type(type), _text(text) { }
     
     const std::string & text() const { return _text; }
