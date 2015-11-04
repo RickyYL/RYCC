@@ -165,7 +165,7 @@ public:
     }
     
     void _list() {
-        std::cout << "Parse list rule at token index: " << index() << std::endl;
+        std::cout << "\tParse list rule at token index: " << index() << std::endl;
         match(LBRACK_TYPE);
         elements();
         match(RBRACK_TYPE);
