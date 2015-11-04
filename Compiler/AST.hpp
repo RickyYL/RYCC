@@ -19,53 +19,42 @@ class AST {
 public:
     
     AST() = default;
-    AST(Token token): token(token), children(nullptr) { }
-   	AST(int tokenType): token(Token(tokenType)), children(nullptr) { }
-    ~AST() { if (children != nullptr) delete children; }
-    
-    int getNodeType() {
-        return token.type();
+    AST(Token token): token(new Token(token)) { }
+    ~AST() {
+//        if (token) delete token;
+//        if (children) delete children;
     }
     
-    void addChild(AST t) {
+    int getNodeType() const { return token->type(); }
+    bool isNil() const { return token == nullptr; }
+    
+    void addChild(AST *t) {
         if (children == nullptr)
-            children = new std::vector<AST>();
-       	children->push_back(t);
+            children = new std::vector<AST*>();
+       	children->push_back(new AST(*t));
     }
     
-    bool isNil() {
-        return token.type() == NOTHING;
+    virtual std::string toString() const {
+        return token != nullptr ? token->text() : "nil";
     }
     
-    std::string toString() {
-        return token.type() != NOTHING ? token.text() : "nil";
-    }
-    
-    std::string toStringTree() {
+    std::string toStringTree() const {
         
         if (children == nullptr || children->size() == 0)
             return toString();
         
         std::string buffer;
-        if (!isNil()) {
-            buffer.append("(");
-            buffer.append(toString());
-            buffer.append(" ");
-        }
-        for (int i = 0; i < children->size(); i++) {
-            AST t((*children)[i]);
-            if (i > 0)
-                buffer.append(" ");
-            buffer.append(t.toStringTree());
-        }
+        
+        for (auto elem: *children)
+            buffer += " " + elem->toStringTree();
         if (!isNil())
-            buffer.append(")");
+            buffer = "(" + toString() + buffer + ")";
         
         return buffer;
     }
     
-    Token token;
-    std::vector<AST> * children;
+    Token * token = nullptr;
+    std::vector<AST*> * children = nullptr;
     
 };
 
@@ -73,20 +62,20 @@ class ExprNode: public AST {
     
 public:
     
+    static const int tINVALID = 0;
+    static const int tINTEGER = 1;
+    static const int tVECTOR  = 2;
+    
     ExprNode(Token payload): AST(payload) { }
 
-    int evalType() const { return _evalType; }
+    int  evalType() const       { return _evalType; }
     void evalType(int newValue) { _evalType = newValue; }
     
-    std::string toString() {
+    std::string toString() const {
         if (evalType() != tINVALID)
             return AST::toString() + "<type=" + (evalType() == tINTEGER ? "tINTEGER" : "tVECTOR" ) + ">";
         return AST::toString();
     }
-    
-    static const int tINVALID = 0;
-    static const int tINTEGER = 1;
-    static const int tVECTOR  = 2;
     
 private:
     
@@ -100,14 +89,14 @@ public:
     AddNode(ExprNode left, Token addToken, ExprNode right)
         : ExprNode(addToken)
     {
-        addChild(left);
-        addChild(right);
+        addChild(&left);
+        addChild(&right);
     }
     
-    int getEvalType() {
+    int getEvalType() const {
         
-        ExprNode left((*children)[0].token);
-        ExprNode right((*children)[1].token);
+        ExprNode left(*children->at(0)->token);
+        ExprNode right(*children->at(1)->token);
         
         if ( left.evalType()==tINTEGER && right.evalType()==tINTEGER ) {
             return tINTEGER;
@@ -124,8 +113,7 @@ class IntNode: public ExprNode {
     
 public:
     
-    IntNode(Token t): ExprNode(t)
-    {
+    IntNode(Token t): ExprNode(t) {
         evalType(tINTEGER);
     }
 };
@@ -134,37 +122,12 @@ class VectorNode: public ExprNode {
     
 public:
     
-    VectorNode(Token t, std::vector<ExprNode> elements)
-        : ExprNode(t)
-    {
+    VectorNode(Token t, std::vector<ExprNode> elements) : ExprNode(t) {
         evalType(tVECTOR);
         for (auto node: elements) {
-            addChild(node);
+            addChild(&node);
         }
     }
 };
 
 #endif /* AST_hpp */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
