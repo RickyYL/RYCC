@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0DBFE3F81BE7483900755F6B /* BTParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D59FEA91BE6099300DBC06D /* BTParser.cpp */; };
+		0DBFE3FB1BE752B600755F6B /* AST.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DBFE3F91BE752B600755F6B /* AST.cpp */; };
 		0DE913561BE4805200804E95 /* Error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DE913531BE476BB00804E95 /* Error.cpp */; };
 		0DE913571BE4805200804E95 /* Token.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DE913501BE46F3400804E95 /* Token.cpp */; };
 		0DE913581BE4805200804E95 /* Lexer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DE9134D1BE46D9100804E95 /* Lexer.cpp */; };
@@ -27,20 +28,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0D59FEA91BE6099300DBC06D /* BTParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BTParser.cpp; sourceTree = "<group>"; };
-		0D59FEAA1BE6099300DBC06D /* BTParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BTParser.hpp; sourceTree = "<group>"; };
-		0DBFE3F51BE70FA800755F6B /* MemBTParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MemBTParser.cpp; sourceTree = "<group>"; };
-		0DBFE3F61BE70FA800755F6B /* MemBTParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MemBTParser.hpp; sourceTree = "<group>"; };
+		0D59FEA91BE6099300DBC06D /* BTParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BTParser.cpp; path = ../BTParser.cpp; sourceTree = "<group>"; };
+		0D59FEAA1BE6099300DBC06D /* BTParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BTParser.hpp; path = ../BTParser.hpp; sourceTree = "<group>"; };
+		0DBFE3F51BE70FA800755F6B /* MemBTParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MemBTParser.cpp; path = ../MemBTParser.cpp; sourceTree = "<group>"; };
+		0DBFE3F61BE70FA800755F6B /* MemBTParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MemBTParser.hpp; path = ../MemBTParser.hpp; sourceTree = "<group>"; };
+		0DBFE3F91BE752B600755F6B /* AST.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AST.cpp; sourceTree = "<group>"; };
+		0DBFE3FA1BE752B600755F6B /* AST.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AST.hpp; sourceTree = "<group>"; };
 		0DE913431BE46D7F00804E95 /* Compiler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Compiler; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DE913461BE46D7F00804E95 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		0DE9134D1BE46D9100804E95 /* Lexer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lexer.cpp; sourceTree = "<group>"; };
-		0DE9134E1BE46D9100804E95 /* Lexer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Lexer.hpp; sourceTree = "<group>"; };
-		0DE913501BE46F3400804E95 /* Token.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Token.cpp; sourceTree = "<group>"; };
-		0DE913511BE46F3400804E95 /* Token.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Token.hpp; sourceTree = "<group>"; };
-		0DE913531BE476BB00804E95 /* Error.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Error.cpp; sourceTree = "<group>"; };
-		0DE913541BE476BB00804E95 /* Error.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Error.hpp; sourceTree = "<group>"; };
-		0DE9135A1BE4974300804E95 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
-		0DE9135B1BE4974300804E95 /* Parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Parser.hpp; sourceTree = "<group>"; };
+		0DE9134D1BE46D9100804E95 /* Lexer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Lexer.cpp; path = ../Lexer.cpp; sourceTree = "<group>"; };
+		0DE9134E1BE46D9100804E95 /* Lexer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Lexer.hpp; path = ../Lexer.hpp; sourceTree = "<group>"; };
+		0DE913501BE46F3400804E95 /* Token.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Token.cpp; path = ../Token.cpp; sourceTree = "<group>"; };
+		0DE913511BE46F3400804E95 /* Token.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Token.hpp; path = ../Token.hpp; sourceTree = "<group>"; };
+		0DE913531BE476BB00804E95 /* Error.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Error.cpp; path = ../Error.cpp; sourceTree = "<group>"; };
+		0DE913541BE476BB00804E95 /* Error.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Error.hpp; path = ../Error.hpp; sourceTree = "<group>"; };
+		0DE9135A1BE4974300804E95 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Parser.cpp; path = ../Parser.cpp; sourceTree = "<group>"; };
+		0DE9135B1BE4974300804E95 /* Parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Parser.hpp; path = ../Parser.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,21 +57,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0DE9133A1BE46D7F00804E95 = {
+		0DBFE3FD1BE752CF00755F6B /* Lexer & Parser */ = {
 			isa = PBXGroup;
 			children = (
-				0DBFE3F51BE70FA800755F6B /* MemBTParser.cpp */,
-				0DBFE3F61BE70FA800755F6B /* MemBTParser.hpp */,
-				0DE913531BE476BB00804E95 /* Error.cpp */,
-				0DE913541BE476BB00804E95 /* Error.hpp */,
-				0DE913501BE46F3400804E95 /* Token.cpp */,
-				0DE913511BE46F3400804E95 /* Token.hpp */,
 				0DE9134D1BE46D9100804E95 /* Lexer.cpp */,
 				0DE9134E1BE46D9100804E95 /* Lexer.hpp */,
 				0DE9135A1BE4974300804E95 /* Parser.cpp */,
 				0DE9135B1BE4974300804E95 /* Parser.hpp */,
 				0D59FEA91BE6099300DBC06D /* BTParser.cpp */,
 				0D59FEAA1BE6099300DBC06D /* BTParser.hpp */,
+				0DBFE3F51BE70FA800755F6B /* MemBTParser.cpp */,
+				0DBFE3F61BE70FA800755F6B /* MemBTParser.hpp */,
+			);
+			name = "Lexer & Parser";
+			path = Compiler;
+			sourceTree = "<group>";
+		};
+		0DBFE3FE1BE752DB00755F6B /* General */ = {
+			isa = PBXGroup;
+			children = (
+				0DE913531BE476BB00804E95 /* Error.cpp */,
+				0DE913541BE476BB00804E95 /* Error.hpp */,
+				0DE913501BE46F3400804E95 /* Token.cpp */,
+				0DE913511BE46F3400804E95 /* Token.hpp */,
+			);
+			name = General;
+			path = Compiler;
+			sourceTree = "<group>";
+		};
+		0DE9133A1BE46D7F00804E95 = {
+			isa = PBXGroup;
+			children = (
+				0DBFE3FD1BE752CF00755F6B /* Lexer & Parser */,
+				0DBFE3FE1BE752DB00755F6B /* General */,
 				0DE913451BE46D7F00804E95 /* Compiler */,
 				0DE913441BE46D7F00804E95 /* Products */,
 			);
@@ -86,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				0DE913461BE46D7F00804E95 /* main.cpp */,
+				0DBFE3F91BE752B600755F6B /* AST.cpp */,
+				0DBFE3FA1BE752B600755F6B /* AST.hpp */,
 			);
 			path = Compiler;
 			sourceTree = "<group>";
@@ -146,6 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DBFE3FB1BE752B600755F6B /* AST.cpp in Sources */,
 				0DBFE3F81BE7483900755F6B /* BTParser.cpp in Sources */,
 				0DE913561BE4805200804E95 /* Error.cpp in Sources */,
 				0DE913571BE4805200804E95 /* Token.cpp in Sources */,
